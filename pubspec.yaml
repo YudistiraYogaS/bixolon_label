@@ -10,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
@@ -41,15 +39,6 @@ flutter:
         pluginClass: BixolonLabelPlugin
       ios:
         pluginClass: BixolonLabelPlugin
-      linux:
-        pluginClass: BixolonLabelPlugin
-      macos:
-        pluginClass: BixolonLabelPlugin
-      windows:
-        pluginClass: BixolonLabelPluginCApi
-      web:
-        pluginClass: BixolonLabelWeb
-        fileName: bixolon_label_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
