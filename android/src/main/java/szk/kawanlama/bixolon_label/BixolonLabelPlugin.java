@@ -3,6 +3,8 @@ package szk.kawanlama.bixolon_label;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.usb.UsbDevice;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 
@@ -16,8 +18,11 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import com.bixolon.commonlib.BXLCommonConst;
 import com.bixolon.commonlib.common.BXLFileHelper;
+import com.bixolon.commonlib.connectivity.searcher.BXLUsbDevice;
 import com.bixolon.commonlib.log.LogService;
 import com.bixolon.labelprinter.BixolonLabelPrinter;
+
+import java.util.Set;
 
 /** BixolonLabelPlugin */
 public class BixolonLabelPlugin implements FlutterPlugin, MethodCallHandler {
@@ -51,11 +56,7 @@ public class BixolonLabelPlugin implements FlutterPlugin, MethodCallHandler {
       case "connectIp":
         final String ipAddress = call.argument("ipAddress");
         this.mBixolonLabelPrinter.connect(ipAddress, 9100, 5000);
-        if (this.mBixolonLabelPrinter.isConnected()) {
-          result.success(true);
-        } else {
-          result.success(false);
-        }
+        result.success(this.mBixolonLabelPrinter.isConnected());
         break;
       case "printText":
         try {
@@ -96,6 +97,20 @@ public class BixolonLabelPlugin implements FlutterPlugin, MethodCallHandler {
         break;
       case "isConnected":
         result.success(this.mBixolonLabelPrinter.isConnected());
+        break;
+      case "connectUsb":
+        try {
+          BXLUsbDevice.refreshUsbDevicesList(this.context);
+          final Set<UsbDevice> usbDevice = BXLUsbDevice.getUsbPrinters();
+          if (usbDevice.size() > 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+              this.mBixolonLabelPrinter.connect(usbDevice.stream().findFirst().get());
+            }
+            result.success(this.mBixolonLabelPrinter.isConnected());
+          }
+        } catch (Exception e) {
+          result.success(false);
+        }
         break;
       default:
         result.notImplemented();

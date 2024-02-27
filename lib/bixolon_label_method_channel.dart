@@ -38,4 +38,9 @@ class MethodChannelBixolonLabel extends BixolonLabelPlatform {
     final result = await methodChannel.invokeMethod<bool>('disconnect');
     return result;
   }
+
+  @override
+  Future<bool?> connectUsb() async {
+    final result = await methodChannel.invokeMethod<bool>('connectUsb');
+  }
 }

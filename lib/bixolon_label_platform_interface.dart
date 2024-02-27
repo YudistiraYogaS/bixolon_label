@@ -56,4 +56,9 @@ abstract class BixolonLabelPlatform extends PlatformInterface {
   Future<bool?> disconnect() {
     throw UnimplementedError('disconnect() has not been implemented.');
   }
+
+  /// search usb device from bixolon sdk
+  Future<bool?> connectUsb() {
+    throw UnimplementedError('connectUsb() has not been implemented');
+  }
 }
