@@ -16,7 +16,7 @@ abstract class BixolonLabelPlatform extends PlatformInterface {
   static BixolonLabelPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [BixolonLabelPlatform] when
+  /// platform-specific class that extends [Bixgit solonLabelPlatform] when
   /// they register themselves.
   static set instance(BixolonLabelPlatform instance) {
     PlatformInterface.verifyToken(instance, _token);
