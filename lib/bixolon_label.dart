@@ -44,7 +44,7 @@ class BixolonLabel {
   }
 
   // automatically search usb device from bixolon sdk
-  Future<bool?> coonectUsb() {
+  Future<bool?> connectUsb() {
      try {
        return BixolonLabelPlatform.instance.connectUsb();
      } catch (e) {
